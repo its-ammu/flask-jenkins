@@ -36,7 +36,7 @@ pipeline {
                 
                 echo "DEPLOYING THE APP... "
                 
-                sh "docker run -p -d 3000:5000 ${USERNAME}/flask:build-${BUILD_ID}"
+                sh "docker run -p 3000:5000 -d ${USERNAME}/flask:build-${BUILD_ID}"
 
                 echo "Succesfully deployed and running in port 3000"
                 
