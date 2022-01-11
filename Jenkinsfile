@@ -34,8 +34,13 @@ pipeline {
         stage('DEPLOY'){
             steps{
                 echo "DEPLOYING THE APP..."
+
+                echo "Removing previous build..."
+
+                sh "docker rm -f flaskapp && echo 'Previous build removed' || echo 'No previous build'"
+
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-                    sh "docker run -p 3000:5000 -d ${USERNAME}/flaskapp:build-${BUILD_ID}"
+                    sh "docker run --name flaskapp -p 3000:5000 -d ${USERNAME}/flaskapp:build-${BUILD_ID}"
                 }
                 echo "Succesfully deployed and running in port 3000"
             }
