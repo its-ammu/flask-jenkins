@@ -40,6 +40,18 @@ pipeline {
                 echo "Succesfully deployed and running in port 3000"
             }
         }
+        
+        stage('CLEANUP'){
+            steps{
+                echo "CLEANING UP..."
+
+                sh """
+                docker image prune -a -f
+                docker container prune -f
+                """
+                
+            }
+        }
 
     }   
 }
