@@ -33,13 +33,9 @@ pipeline {
 
         stage('DEPLOY'){
             steps{
-                
-                echo "DEPLOYING THE APP... "
-                
-                sh "docker run -p 3000:5000 -d ${USERNAME}/flask:build-${BUILD_ID}"
-
+                echo "DEPLOYING THE APP..."
+                sh "docker run -p 3000:5000 -d ${USERNAME}/flaskapp:build-${BUILD_ID}"
                 echo "Succesfully deployed and running in port 3000"
-                
             }
         }
 
